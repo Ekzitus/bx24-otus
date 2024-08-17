@@ -9,3 +9,5 @@
 
 *.tar
 *.zip
+
+/local/php_interface/vendor
