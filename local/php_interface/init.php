@@ -5,22 +5,22 @@ if (file_exists(__DIR__ . '/classes/autoload.php')) {
     require_once __DIR__ . '/classes/autoload.php';
 }
 
-\Otus\Diagnostic\Helper::writeToLog('Hello, world!');
+require_once __DIR__ . '/vendor/autoload.php';
+
+//\Otus\Diagnostic\Helper::writeToLog('Hello, world!');
 
 
 //throw new \Exception('Hello, world!');
 
-require_once __DIR__ . '/vendor/autoload.php';
+//use Monolog\Registry;
+//use Monolog\Handler\StreamHandler;
+//use Monolog\Logger;
 
-use Monolog\Registry;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
-
-$logger = Registry::getInstance('app');
+//$logger = Registry::getInstance('feedback');
 
 // Write info message with context: invalid message from feedback
-$logger->error('Failed create new message on feedback form', array(
-    'item_id' => 21,
-    'Invalid data' => "Ошибка", // error savings
-    'Form data' => "Дата" // data from feedback form
-));
+//$logger->error('Failed create new message on feedback form', array(
+//    'item_id' => 21,
+//    'Invalid data' => "Ошибка", // error savings
+//    'Form data' => "Дата" // data from feedback form
+//));
