@@ -7,6 +7,13 @@ if (file_exists(__DIR__ . '/classes/autoload.php')) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+// Проверяем, существует ли класс MyClass
+//if (class_exists('Otus\ORM\OrdersTable')) {
+//
+//} else {
+//    echo "Класс MyClass не существует.";
+//}
+
 //\Otus\Diagnostic\Helper::writeToLog('Hello, world!');
 
 

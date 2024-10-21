@@ -97,34 +97,52 @@ class FirstGrid extends CBitrixComponent
         $this->arResult['FILTER_ID'] = 'DOCTORS_GRID';
 
         if (\Bitrix\Main\Loader::includeModule('iblock')) {
-            $select = [
-                'ID',
-                'NAME',
-                'PROCEDURES.ELEMENT.NAME'
-            ];
-            $iblock = '\Bitrix\Iblock\Elements\ElementDoctorsTable';
+//            $select = [
+//                'ID',
+//                'NAME',
+//                'PROCEDURES.ELEMENT.NAME'
+//            ];
+//            $iblock = '\Bitrix\Iblock\Elements\ElementDoctorsTable';
+//
+//            $result = $iblock::query()
+//                ->setSelect($select)
+//                ->fetchCollection();
 
-            $result = $iblock::query()
-                ->setSelect($select)
-                ->fetchCollection();
+            $orders = \Otus\ORM\OrdersTable::getList([
+                'select' => [
+                    'id',
+                    'total',
+                    'CUSTOMERS.*',
+                ]
+            ]);
 
-            foreach ($result as $doctor) {
-                $procedures = '';
-                foreach ($doctor->getProcedures() as $procedure) {
-                    $procedures .= $procedure->getElement()->getName() . "<br>";
-                }
-
+            while ($order = $orders->fetch()) {
                 $this->arResult['GRID_LIST'][] = [
                     'data' => [
-                        'DOCTORS_ID' => $doctor->getId(),
-                        'DOCTORS_NAME' => $doctor->getName(),
-                        'PROCEDURES_NAME' => $procedures,
+                        'DOCTORS_ID' => $order['id'],
+                        'DOCTORS_NAME' => $order['total'],
+                        'PROCEDURES_NAME' => $order['CUSTOMERS.ID'],
                     ],
-                    'attributes' => [
-                        'data-id' => $doctor->getId(), // Добавляем атрибут data-id
-                    ]
                 ];
             }
+
+//            foreach ($result as $doctor) {
+//                $procedures = '';
+//                foreach ($doctor->getProcedures() as $procedure) {
+//                    $procedures .= $procedure->getElement()->getName() . "<br>";
+//                }
+
+//                $this->arResult['GRID_LIST'][] = [
+//                    'data' => [
+//                        'DOCTORS_ID' => $doctor->getId(),
+//                        'DOCTORS_NAME' => $doctor->getName(),
+//                        'PROCEDURES_NAME' => $procedures,
+//                    ],
+//                    'attributes' => [
+//                        'data-id' => $doctor->getId(), // Добавляем атрибут data-id
+//                    ]
+//                ];
+//            }
         }
 
         $this->includeComponentTemplate();
