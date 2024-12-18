@@ -12,7 +12,7 @@ class OtusGridCrmTabs
         $entityId = $event->getParameter('entityID');
         $tabs = $event->getParameter('tabs');
 
-        var_dump($tabs);
+        //var_dump($tabs);
 
         $tabs[] = [
             'id' => 'component_users',
